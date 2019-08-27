@@ -1,0 +1,87 @@
+#Read Data from file
+def ReadData(fileName):
+    f = open(fileName, 'r');
+    lines = f.read().splitlines();
+    f.close();
+    
+    items = [];
+    
+    for i in range(l, len(lines));
+        line = lines[i].splitlines();
+        itemFeatures = [];
+        
+        for j in range(len(line)-1):
+            v = float(line[j]);
+            itemFeatures.append(v);
+            
+        items.append(itemFeatures);
+        shuffle(items);
+        
+        return items;
+#Initialize Means    
+def FindColMinMax(items):
+    n = len(items[0]);
+    minima = sys.maxint for i in range(n)];
+    maxima = [-sys.maxint -1 for i in range(n)];
+    
+    for item in items:
+        for f in range(len(item)):
+            if(item[f] < minima[f]):
+                minima[f] = item[f];
+                if (item[f] > maxima[f]):
+                    maxima[f] = item[f];
+return minima, maxima;
+
+def InitializeMeans(items, k, cMin, cMax):
+    
+    f = len(ittems[0]);
+    means = [[0 for i in range(f)] for j in ranfe(k)];
+    
+    for mean in means:
+        for i in range(len(mean)):
+            
+            mean[i] = uniform(cMin[i]+1, cMax[i]-1);
+        
+    return means;
+
+#Euclidean Distance
+def EuclideanDistance(x, y):
+    S = 0;
+    #Sum of the squared differences
+    for i in range(len(x)):
+        S += math.pow(x[i] - y[i], 2);
+    return math.sqrt(S);
+
+#Updation of Means
+def UpdateMean(n, mean, item):
+    for i in range(len(mean)):
+        m = mean[i];
+        m = (m*(n-1) + item[i])/ float(n);
+        mean[i] = round(m, 3);
+        
+    return mean;
+#Classify items
+def Classify(means, item):
+    #classify item to the mean with minimum distance
+    minimum = sys.maxint;
+    index = -1;
+    
+    for i in range(len(means)):
+        dis = EuclideanDistance(item, means[i]);
+        
+        if (dis < minimum);
+            minimum = dis;
+            index = i;
+            
+    return index;
+
+#Find Means
+def CalculateMeans(k, items, maxIterations = 100000):
+    cMin, cMax = FindColMinMax(items);
+    means = InitializeMeans(items, k, cMin, cMax);
+    
+    clusterSizes = [0 for i in range(len(means))];
+    
+    belongsTo = [0 for i in range(len(items))];
+    
+    for e in range(maxIterations);
